@@ -1,0 +1,36 @@
+# CPU-only dependency set for cloud/container hosting (no NVIDIA GPU).
+#
+# torch / torchaudio are NOT listed here — the Dockerfile installs the CPU build
+# from https://download.pytorch.org/whl/cpu before installing this file. (The
+# GPU build pinned in requirements.txt is for local development on a CUDA machine.)
+
+# Core TTS stack (transformers/sentencepiece/protobuf back Kokoro's ALBERT model)
+transformers>=4.46,<4.50
+sentencepiece
+protobuf
+
+# Audio + text utilities
+soundfile
+numpy<2
+num2words
+pyyaml
+
+# Image-to-story pipeline (pure-Python clients; the API path does not use them,
+# but the package imports stay satisfied). External Tesseract/Ollama not required
+# for /synthesize.
+pytesseract
+pillow
+ollama
+
+# Interfaces
+typer>=0.12
+gradio>=4.44
+
+# HTTP REST API
+fastapi
+uvicorn[standard]
+
+# Kokoro-82M — default backend (non-gated, Apache-2.0). misaki provides g2p;
+# the Hindi voices use espeak-ng (the Dockerfile installs the espeak-ng system pkg).
+kokoro>=0.9.2
+misaki[en]>=0.9.2

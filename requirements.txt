@@ -1,0 +1,36 @@
+# PyTorch built for CUDA 11.8 — compatible with the GTX 1650 / driver 457.49.
+# (cu121+ wheels require a newer NVIDIA driver than is installed.)
+--extra-index-url https://download.pytorch.org/whl/cu118
+torch==2.4.1+cu118
+torchaudio==2.4.1+cu118
+
+# Core TTS stack (transformers/sentencepiece/protobuf back Kokoro's ALBERT model)
+transformers>=4.46,<4.50
+sentencepiece
+protobuf
+
+# Audio + text utilities
+soundfile
+numpy<2
+num2words
+pyyaml
+
+# Image-to-story pipeline: Tesseract OCR wrapper + local LLM client.
+# Also needs the external Tesseract binary on PATH (or TESSERACT_CMD) and the
+# Ollama app running with a model pulled (e.g. `ollama pull llama3`).
+pytesseract
+pillow
+ollama
+
+# Interfaces
+typer>=0.12
+gradio>=4.44
+
+# HTTP REST API (cross-project access without the heavy torch/kokoro stack).
+fastapi
+uvicorn[standard]
+
+# Kokoro-82M — default backend (non-gated, Apache-2.0). misaki provides g2p;
+# the Hindi voices use espeak-ng (pulled in via misaki/espeakng-loader).
+kokoro>=0.9.2
+misaki[en]>=0.9.2

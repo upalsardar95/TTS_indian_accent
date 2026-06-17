@@ -1,0 +1,28 @@
+# Generated audio
+outputs/
+*.wav
+*.mp3
+*.flac
+*.ogg
+!examples/**
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# Model caches (HuggingFace downloads these on first run)
+.cache/
+hf_cache/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

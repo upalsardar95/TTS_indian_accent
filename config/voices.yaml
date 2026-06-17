@@ -1,0 +1,39 @@
+# Voice presets for the Hinglish storytelling TTS engine.
+#
+# Each entry maps a friendly name to:
+#   description : the natural-language prompt that steers Indic Parler-TTS. The
+#                 first word is a recommended Indic Parler speaker name (Divya,
+#                 Aditi, Rohit, Aman, Rani...) which keeps the voice consistent
+#                 across Hindi + English. The rest describes tone/pace/quality.
+#   kokoro_voice: voice id used only by the optional fast "kokoro" backend.
+#   speed       : speaking rate hint (used by Kokoro; Parler honors the description).
+#   line_pause  : seconds of silence inserted after each line / sentence.
+#   stanza_pause: seconds of silence inserted after a blank-line (stanza) break.
+
+voices:
+  classic-storyteller:
+    description: >-
+      Divya speaks in an expressive and animated storytelling tone at a moderate
+      pace. The recording is very clear and close-sounding with no background noise.
+    kokoro_voice: hf_alpha
+    speed: 1.0
+    line_pause: 0.35
+    stanza_pause: 0.75
+
+  bedtime:
+    description: >-
+      Aditi speaks slowly and softly in a calm, soothing, gentle bedtime voice.
+      Very clear and close-sounding audio with no background noise.
+    kokoro_voice: hf_beta
+    speed: 0.9
+    line_pause: 0.5
+    stanza_pause: 1.0
+
+  energetic-rhyme:
+    description: >-
+      Rohit speaks in a lively, energetic and playful tone with expressive,
+      animated delivery at a slightly fast pace. Very clear, close-sounding audio.
+    kokoro_voice: hm_omega
+    speed: 1.1
+    line_pause: 0.25
+    stanza_pause: 0.6

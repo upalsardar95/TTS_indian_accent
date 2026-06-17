@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "indian-tts"
+version = "0.1.0"
+description = "Offline Hinglish (English + Hindi) storytelling & rhyme TTS engine with an Indian accent."
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Arpan" }]
+
+# NOTE: torch and parler-tts need special install handling (CUDA wheel index /
+# git source) — install them via `pip install -r requirements.txt`. The deps
+# below are the pure-PyPI pieces so the package metadata stays installable.
+dependencies = [
+    "transformers>=4.46,<4.50",
+    "soundfile",
+    "numpy<2",
+    "num2words",
+    "pyyaml",
+    "typer>=0.12",
+    "gradio>=4.44",
+    # HTTP REST API (cross-project access without the heavy torch/kokoro stack).
+    "fastapi",
+    "uvicorn[standard]",
+    "sentencepiece",
+    "protobuf",
+    # Image-to-story pipeline (also needs the external Tesseract binary + Ollama app).
+    "pytesseract",
+    "pillow",
+    "ollama",
+]
+
+[project.scripts]
+indian-tts = "indian_tts.cli.main:run"
+indian-tts-web = "indian_tts.web.app:main"
+indian-tts-api = "indian_tts.api.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+indian_tts = ["../../config/voices.yaml"]
