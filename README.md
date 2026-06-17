@@ -29,6 +29,16 @@ Python core, a CLI, and a local web UI, behind a pluggable backend layer.
 
 ## Install
 
+**Quick setup (recommended):** one script creates the venv, installs everything, and
+verifies the environment — use it on any fresh machine after cloning:
+
+```powershell
+.\scripts\setup.ps1
+# or, if `py` isn't available:  .\scripts\setup.ps1 -PythonLauncher "C:\Python311\python.exe"
+```
+
+<details><summary>Manual steps (what the script runs)</summary>
+
 ```powershell
 # Use Python 3.11 explicitly to create the venv
 & "$env:LocalAppData\Programs\Python\Python311\python.exe" -m venv .venv
@@ -37,6 +47,10 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt   # torch (cu118) + kokoro + everything else
 pip install -e .                  # installs the `indian-tts` / `indian-tts-web` commands
 ```
+</details>
+
+For a CPU-only server / container, skip the venv and use the [Dockerfile](Dockerfile)
+(`requirements-cpu.txt`) — see [DEPLOY.md](DEPLOY.md).
 
 The Kokoro model (~330 MB) downloads automatically on first use. No login needed.
 
